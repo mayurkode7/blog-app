@@ -69,12 +69,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# Firebase configuration
+## Firebase configuration
 
 create firebase project - blog
+
 create web app within firebase project - blog-web
+
 Enable authentication - google authentication
+
 add package to web app package.json --- npm i firebase
+
 add firebase.config.js file -- to store configuration string from firebase project
+
 make connection with firestore with help of firebase/firestore
+
 make authentication with firebase/auth
