@@ -1,13 +1,15 @@
 import React from 'react'
 import { auth, provider } from '../firebase-config'
 import { signInWithPopup } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 
 function SignIn() {
-
+  let navigate = useNavigate()
 
   const signInWithGoogle = async () => {
     let signIn = await signInWithPopup(auth, provider)
     localStorage.setItem("signIn", signIn?.user?.email)
+    navigate('/')
   }
 
   return (
