@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import About from './pages/About'
 import CreateBlog from './pages/CreateBlog'
+import SignOut from './components/SignOut'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -22,7 +23,7 @@ function App() {
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/create-blog">Create Blog</Link>
-        <Link to="/sign-in">Sign In</Link>
+        {!isAuthenticated ? <Link to="/sign-in">Sign In</Link> : <SignOut setIsAuthenticated={setIsAuthenticated}></SignOut>}
       </nav>
       <Routes>
         <Route path='/' element={<Home />} ></Route>
