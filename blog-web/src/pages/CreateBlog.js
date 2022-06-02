@@ -3,7 +3,7 @@ import { addDoc, collection } from 'firebase/firestore'
 import React, { useState, useEffect } from 'react'
 import { db, auth } from '../firebase-config'
 
-function CreateBlog() {
+function CreateBlog({ isAuthenticated }) {
 
   const [title, setTitle] = useState("")
   const [blogText, setBlogText] = useState("")
@@ -18,6 +18,10 @@ function CreateBlog() {
     await addDoc(blogsCollectionRef, data)
     navigate("/")
   }
+
+  useEffect(() => {
+    if (!isAuthenticated) navigate("/sign-in")
+  }, [])
 
   return (
     <div className="createPostPage">

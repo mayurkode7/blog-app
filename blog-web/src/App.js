@@ -22,14 +22,19 @@ function App() {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
-        <Link to="/create-blog">Create Blog</Link>
-        {!isAuthenticated ? <Link to="/sign-in">Sign In</Link> : <SignOut setIsAuthenticated={setIsAuthenticated}></SignOut>}
+
+        {!isAuthenticated ? <Link to="/sign-in">Sign In</Link> :
+          <>
+            <Link to="/create-blog">Create Blog</Link>
+            <SignOut setIsAuthenticated={setIsAuthenticated}></SignOut>
+          </>
+        }
       </nav>
       <Routes>
         <Route path='/' element={<Home />} ></Route>
         <Route path='/sign-in' element={<SignIn setIsAuthenticated={setIsAuthenticated} />} ></Route>
         <Route path='/about' element={<About />} ></Route>
-        <Route path='/create-blog' element={<CreateBlog />} ></Route>
+        <Route path='/create-blog' element={<CreateBlog isAuthenticated={isAuthenticated} />} ></Route>
       </Routes>
     </Router >
   );
