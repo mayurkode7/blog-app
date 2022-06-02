@@ -1,11 +1,23 @@
+import { useNavigate } from 'react-router-dom'
+import { addDoc, collection } from 'firebase/firestore'
 import React, { useState, useEffect } from 'react'
+import { db, auth } from '../firebase-config'
 
 function CreateBlog() {
 
   const [title, setTitle] = useState("")
   const [blogText, setBlogText] = useState("")
 
-  const createBlog = () => { }
+  const blogsCollectionRef = collection(db, "blogs")
+
+  const navigate = useNavigate()
+
+  const createBlog = async () => {
+
+    const data = { title, blogText, author: { name: auth.currentUser.displayName, email: auth.currentUser.email } }
+    await addDoc(blogsCollectionRef, data)
+    navigate("/")
+  }
 
   return (
     <div className="createPostPage">
