@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useId } from 'react'
 import { getDocs, collection } from 'firebase/firestore'
-import { db } from '../firebase-config'
+import { db, auth } from '../firebase-config'
 
-function Home() {
+import BlogCard from '../components/BlogCard'
+
+function Home({ isAuth }) {
+
+  let id = useId()
 
   const [blogList, setBlogList] = useState(null)
 
@@ -18,15 +22,21 @@ function Home() {
 
     getBlogList()
 
+
   }, [])
 
-  return (
-    <>
-      <div>Home</div>
 
-      {blogList && blogList.map(item => <p> {item.title}</p>)}
-    </>
-  )
+  return (
+    <div className="homePage">
+      {blogList && blogList.map((post) => {
+
+        return (
+          <BlogCard post={post} key={`${id}-${post.title}`} />
+        );
+      })}
+    </div>
+  );
+
 }
 
 export default Home
