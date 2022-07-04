@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useId } from 'react'
-import { getDocs, collection } from 'firebase/firestore'
+import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore'
 import { db, auth } from '../firebase-config'
 
 import BlogCard from '../components/BlogCard'
@@ -26,12 +26,19 @@ function Home({ isAuth }) {
   }, [])
 
 
+  const deleteBlog = async (id) => {
+    const blogDoc = doc(db, "blogs", id)
+    await deleteDoc(blogDoc)
+
+  }
+
+
   return (
     <div className="homePage">
       {blogList && blogList.map((post) => {
 
         return (
-          <BlogCard post={post} key={`${id}-${post.title}`} />
+          <BlogCard post={post} key={`${id}-${post.title}`} deleteBlog={deleteBlog} isAuth={isAuth} />
         );
       })}
     </div>
